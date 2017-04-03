@@ -1,0 +1,72 @@
+<md-content ng-controller="HomeController as home">
+
+    <div upload></div>
+
+    <div class="well-lg" layout="column" layout-align="center start" style="text-align:center;">
+        <div layout="row" layout-xs="column" layout-align="center start">
+            <div flex-order-xs="2" flex-gt-xs="30">
+                <h2 hide-xs> This is a sample Header</h2>
+                <p> Save files on your computer, then access them on your phone from the road. Everything you keep in
+                    Dropbox is synced automatically to all your devices.</p>
+            </div>
+            <div flex-gt-xs="10"></div>
+            <div flex-order-xs="1" flex-gt-xs="40">
+                <h2 hide-gt-xs> This is a sample Header</h2>
+                <img src="/gazette/resources/images/sample-image.png">
+            </div>
+        </div>
+        <div flex-offset="20" flex-offset-xs="40">
+            <span ng-if="home.isCollapsed1" type="button" ng-click="home.isCollapsed1 = !home.isCollapsed1">
+                <button type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
+                Read More
+            </span>
+            <span ng-if="!home.isCollapsed1" type="button" ng-click="home.isCollapsed1 = !home.isCollapsed1">
+                <button type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
+                Close
+            </span>
+        </div>
+
+        <hr>
+        <div uib-collapse="home.isCollapsed1">
+            <p>
+                Here it's this page specific content :)
+            </p>
+            <h1>{{home.myTest}}</h1>
+        </div>
+    </div>
+
+    <div class="well-lg" layout="column" layout-align="center start" style="text-align:center;">
+        <div layout="row" layout-xs="column" layout-align="center start">
+            <div flex-order-xs="1" flex-gt-xs="40">
+                <h2 hide-gt-xs> This is a sample Header</h2>
+                <img src="/gazette/resources/images/sample-image.png">
+            </div>
+            <div flex-gt-xs="10"></div>
+            <div flex-order-xs="2" flex-gt-xs="30">
+                <h2 hide-xs> This is a sample Header</h2>
+                <p> Save files on your computer, then access them on your phone from the road. Everything you keep in
+                    Dropbox is synced automatically to all your devices.</p>
+            </div>
+        </div>
+        <div flex-offset="70" flex-offset-xs="40">
+            <span ng-if="home.isCollapsed2" type="button" ng-click="home.isCollapsed2 = !home.isCollapsed2">
+                <button type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
+                Read More
+            </span>
+            <span ng-if="!home.isCollapsed2" type="button" ng-click="home.isCollapsed2 = !home.isCollapsed2">
+                <button type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
+                Close
+            </span>
+        </div>
+
+        <hr>
+        <div uib-collapse="home.isCollapsed2">
+            <p>
+                Here it's this page specific content :)
+            </p>
+            <h1>{{home.myTest}}</h1>
+        </div>
+    </div>
+
+
+</md-content>

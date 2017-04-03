@@ -1,0 +1,20 @@
+<md-content ng-controller="UploadController as upload" layout="column" layout-align="center center">
+    <md-content
+            class="drop-box"
+            layout="row" layout-align="center center"
+
+            ngf-drop
+            ngf-select
+            ng-model="file"
+            ngf-drag-over-class="'dragover'"
+
+
+            ngf-drop-available="dropAvailable">
+        <div flex="100">
+            Select File<span ng-show="dropAvailable" class=""> or Drop File</span>
+        </div>
+    </md-content>
+    <md-progress-circular md-mode="determinate" value="{{upload.percentage}}">{{upload.percentage}}%</md-progress-circular>
+    <hr>
+    <div class="col-sm-8 col-xs-8"><uib-progressbar class="progress-striped" value="upload.percentage" type="primary">{{upload.percentage}}%</uib-progressbar></div>
+</md-content>

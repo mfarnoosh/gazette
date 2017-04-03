@@ -1,0 +1,29 @@
+<md-content>
+    <md-toolbar class="md-menu-toolbar md-whiteframe-1dp" style="position: fixed;top: 0;" md-scroll-shrink>
+        <div class="md-toolbar-tools" layout="row">
+            <!--<button ng-click="header.toggleSidenav('left')" hide-gt-sm class="menuBtn" aria-label="Toggle Menu"></button>-->
+
+            <!--This is Left side-->
+            <div flex="20" layout="row" layout-align="start">
+                <md-button class="md-raised md-primary" style="text-transform: capitalize;">Download app</md-button>
+            </div>
+
+            <!--This is center-->
+            <div flex="60" layout="row" layout-align="center">
+                <label>{{header.title}}</label>
+            </div>
+
+            <!--This is Right side-->
+            <div flex="20" layout="row" layout-align="end">
+                <md-button> About us</md-button>
+                <md-button ng-click="header.signup()">Sign up</md-button>
+                <md-button>Sign in</md-button>
+            </div>
+
+            <!--<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">-->
+                <!--<div>Side Navigation</div>-->
+            <!--</md-sidenav>-->
+        </div>
+    </md-toolbar>
+
+</md-content>
