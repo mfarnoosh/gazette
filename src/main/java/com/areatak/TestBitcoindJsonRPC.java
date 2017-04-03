@@ -4,6 +4,7 @@ import wf.bitcoin.javabitcoindrpcclient.*;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -17,26 +18,18 @@ public class TestBitcoindJsonRPC {
      * 2- create a new maven project and add "JavaBitcoindRpcClient" dependency to that.
      * 3- create a main function in your new project and copy these lines.
      */
-    public void main(){
+    public void main() {
         BitcoindRpcClient bitcoin = null;
-        BitcoinAcceptor acceptor = null;
         try {
             bitcoin = new BitcoinJSONRPCClient("http://rpcuser:rpcpassword@localhost:8332");
-            acceptor = new BitcoinAcceptor(bitcoin);
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         List unspentList = bitcoin.listUnspent();
         System.out.println(unspentList.size());
 
-        BitcoinPaymentListener listener = new ConfirmedPaymentListener() {
-            @Override
-            public void confirmed(BitcoindRpcClient.Transaction transaction) {
-                System.out.println("confirmed: " + transaction.txId());
-            }
-        };
-        acceptor.addListener(listener);
+        //Farnoosh: 960115
+        //TODO: for receive event handling see the receiveCoins method below.
 
 
 
@@ -59,5 +52,32 @@ public class TestBitcoindJsonRPC {
         String txId = bitcoin.sendRawTransaction(signedTx);
 
         System.out.println("tx sent, id= " + txId);
+
+    }
+
+    public void receiveCoins(final BitcoindRpcClient bitcoin) {
+        final BitcoinAcceptor acceptor = new BitcoinAcceptor(bitcoin);
+
+        System.out.println("Send bitcoins to " + bitcoin.getNewAddress("NewAccount"));
+
+        acceptor.addListener(new ConfirmedPaymentListener() {
+            HashSet processed = new HashSet();
+
+            @Override
+            public void confirmed(BitcoindRpcClient.Transaction transaction) {
+                if (!processed.add(transaction.txId()))
+                    return; // already processed
+
+                System.out.println("Payment received, amount: " + transaction.amount() + "; account: " + transaction.account());
+                try {
+                    if (bitcoin.getBalance("NewAccount") >= 10)
+                        acceptor.stopAccepting();
+                } catch (BitcoinRPCException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+        });
+        acceptor.run();
     }
 }
